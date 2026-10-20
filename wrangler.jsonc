@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "palimpsesto",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-18",
+  "workers_dev": true,
+  // La web es estática; el Worker sólo atiende las teselas, que pide al IGN y guarda en caché.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none",
+    "run_worker_first": ["/proyecto/palimpsesto/teselas/*"]
+  },
+  "routes": [
+    { "pattern": "pedrogomez.dev/proyecto/palimpsesto", "zone_name": "pedrogomez.dev" },
+    { "pattern": "pedrogomez.dev/proyecto/palimpsesto/*", "zone_name": "pedrogomez.dev" },
+    { "pattern": "www.pedrogomez.dev/proyecto/palimpsesto", "zone_name": "pedrogomez.dev" },
+    { "pattern": "www.pedrogomez.dev/proyecto/palimpsesto/*", "zone_name": "pedrogomez.dev" }
+  ]
+}

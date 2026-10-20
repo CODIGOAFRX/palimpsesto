@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Palimpsesto · Granada, capa a capa</title>
+    <meta name="description" content="La misma Granada en dos épocas: planimetrías de 1870, el vuelo americano de 1956 y la ciudad de hoy, con una cortina que se arrastra.">
+    <meta name="theme-color" content="#f3eee3">
+    <link rel="canonical" href="https://www.pedrogomez.dev/proyecto/palimpsesto/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Palimpsesto · Granada, capa a capa">
+    <meta property="og:description" content="Arrastra la cortina y mira qué había debajo de la ciudad de hoy.">
+    <link rel="icon" href="{{BASE}}/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="{{BASE}}/fonts/fell.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{BASE}}/vendor/maplibre-gl.css?v={{v:vendor/maplibre-gl.css}}">
+    <link rel="stylesheet" href="{{BASE}}/palimpsesto.css?v={{v:palimpsesto.css}}">
+    <script type="module" src="{{BASE}}/palimpsesto.js?v={{v:palimpsesto.js}}"></script>
+</head>
+<body>
+    <div class="mapas" id="mapas">
+        <div class="mapa" id="mapa-despues" aria-hidden="true"></div>
+        <div class="mapa mapa-antes" id="mapa-antes" aria-hidden="true"></div>
+        <div class="cortina" id="cortina" role="slider" tabindex="0" aria-label="Cortina entre las dos épocas"
+            aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Mitad y mitad">
+            <span class="cortina-asa" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
+            </span>
+        </div>
+        <span class="anillo" id="anillo" aria-hidden="true"></span>
+        <p class="marca marca-antes" id="marca-antes" aria-hidden="true"></p>
+        <p class="marca marca-despues" id="marca-despues" aria-hidden="true"></p>
+    </div>
+
+    <header class="cabecera">
+        <a class="volver" href="/#projects">Pedro Gómez.</a>
+        <h1>Palimpsesto</h1>
+        <p class="lema">Granada, capa a capa. Arrastra la cortina y mira qué había debajo de la ciudad de hoy.</p>
+    </header>
+
+    <section class="mando" aria-label="Épocas y modo">
+        <div class="epocas">
+            <label class="epoca">
+                <span class="epoca-rotulo">Antes</span>
+                <select id="sel-antes"></select>
+            </label>
+            <label class="epoca">
+                <span class="epoca-rotulo">Después</span>
+                <select id="sel-despues"></select>
+            </label>
+        </div>
+        <div class="modos" role="radiogroup" aria-label="Modo de comparación">
+            <button type="button" role="radio" data-modo="cortina" aria-checked="true">Cortina</button>
+            <button type="button" role="radio" data-modo="lupa" aria-checked="false">Lupa</button>
+            <button type="button" role="radio" data-modo="fundido" aria-checked="false">Fundido</button>
+        </div>
+        <label class="fundido" id="fundido" hidden>
+            <span class="sr-only">Cuánto se ve la época de antes</span>
+            <input type="range" id="fundido-valor" min="0" max="100" value="60">
+        </label>
+    </section>
+
+    <aside class="nota" id="nota" aria-live="polite">
+        <nav class="lugares" id="lugares" aria-label="Lugares de Granada"></nav>
+        <h2 class="nota-titulo" id="nota-titulo"></h2>
+        <p class="nota-texto" id="nota-texto"></p>
+        <p class="nota-capas" id="nota-capas"></p>
+    </aside>
+
+    <noscript><p class="sin-js">Palimpsesto necesita JavaScript para dibujar los mapas.</p></noscript>
+</body>
+</html>
